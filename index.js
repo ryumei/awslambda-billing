@@ -12,6 +12,7 @@ var floatFormat = function(number, n) {
 }
 
 var postToSlack = function(billings, context) {
+    /*
     var fields = [];
     for (var serviceName in billings) {
         fields.push({
@@ -21,7 +22,6 @@ var postToSlack = function(billings, context) {
         });
     }
     var message = {
-        channel: channel_name,
         attachments: [{
             fallback: '今月の AWS の利用費は、' + floatFormat(billings['Total'], 2) + ' USDです。',
             pretext: '今月の AWS の利用費は…',
@@ -29,7 +29,7 @@ var postToSlack = function(billings, context) {
             fields: fields
         }]
     };
-    
+    */
     var awParam = {
         FunctionName: postFunctionName,
         InvokeArgs: '{ "payload":"' + new Buffer('{ "data1": "ほげ", "data2": "ふが" }').toString('base64') + '"}'
