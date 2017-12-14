@@ -1,5 +1,5 @@
 var aws   = require('aws-sdk');
-var lambda = new.Lambda();
+var lambda = new aws.Lambda({apiVersion: '2015-03-31'});
 var cw    = new aws.CloudWatch({region: 'ap-northeast-1', endpoint: 'https://monitoring.ap-northeast-1.amazonaws.com'});
 
 var postFunctionName = process.env.POST_FUNCTION_NAME;
