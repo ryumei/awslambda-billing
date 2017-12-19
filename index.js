@@ -12,7 +12,7 @@ var floatFormat = function(number, n) {
 }
 
 var postToSlack = function(billings, context) {
-    /*
+    
     var fields = [];
     for (var serviceName in billings) {
         fields.push({
@@ -29,15 +29,15 @@ var postToSlack = function(billings, context) {
             fields: fields
         }]
     };
-    */
+    
     var params = {
         FunctionName: postFunctionName,
-        //InvokeArgs: '{ "payload":"' + new Buffer('{ "data1": "ほげ", "data2": "ふが" }').toString('base64') + '"}'
-        InvokeArgs: JSON.stringify({
+        InvokeArgs: JSON.stringify(message, null, ' ')
+        /*InvokeArgs: JSON.stringify({
             "key_1": 'var_1',
             "key_2": 'var_2',
             "key_3": 'var_3'
-        }, null, ' ')
+        }, null, ' ')*/
     };
     lambda.invokeAsync(params, function(err, data) {
         if(err) {
