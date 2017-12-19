@@ -22,6 +22,7 @@ var postToSlack = function(billings, context) {
         });
     }
     var message = {
+        title: "billing report",
         attachments: [{
             fallback: '今月の AWS の利用費は、' + floatFormat(billings['Total'], 2) + ' USDです。',
             pretext: '今月の AWS の利用費は…',
