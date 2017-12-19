@@ -34,11 +34,6 @@ var postToSlack = function(billings, context) {
     var params = {
         FunctionName: postFunctionName,
         InvokeArgs: JSON.stringify(message, null, ' ')
-        /*InvokeArgs: JSON.stringify({
-            "key_1": 'var_1',
-            "key_2": 'var_2',
-            "key_3": 'var_3'
-        }, null, ' ')*/
     };
     lambda.invokeAsync(params, function(err, data) {
         if(err) {
