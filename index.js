@@ -6,16 +6,6 @@ var postFunctionName = process.env.POST_FUNCTION_NAME;
 
 var serviceNames = ['AmazonEC2', 'AmazonRDS', 'AmazonRoute53', 'AmazonS3', 'AmazonSNS', 'AWSDataTransfer', 'AWSLambda', 'AWSQueueService', 'AWSConfig'];
 
-var stsParams = {}
-var sts = new aws.STS();
-sts.getCallerIdentity(stsParams, function(err, data) {
-    if (err) {
-        console.log("Error", err);
-    } else {
-        console.log(JSON.stringify(data.Account));
-    }
-});
-
 var floatFormat = function(number, n) {
     var _pow = Math.pow(10 , n) ;
     return Math.round(number * _pow)  / _pow;
@@ -31,13 +21,18 @@ var postToSlack = function(billings, context) {
             short: true
         });
     }
-    console.log("STS info:" + stsParams);
-    var accountId = stsParams.Account;
+    var sts = new aws.STS();
+    var accId = sts.getCallerIdentity({}, function(err, data) {
+        if (err) {
+            console.log("Error", err);
+        }
+    });
+
     var message = {
         title: "billing report",
         attachments: [{
-            fallback: accountId + 'の今月の AWS の利用費は、' + floatFormat(billings['Total'], 2) + ' USDです。',
-            pretext: accountId + 'の今月の AWS の利用費は…',
+            fallback: accId + ' の今月の AWS の利用費は、' + floatFormat(billings['Total'], 2) + ' USDです。',
+            pretext: accId + ' の今月の AWS の利用費は…',
             color: 'good',
             fields: fields
         }]
