@@ -32,11 +32,12 @@ var postToSlack = function(billings, context) {
         });
     }
     console.log("STS info:" + stsParams);
+    var accountId = stsParams.Account;
     var message = {
         title: "billing report",
         attachments: [{
-            fallback: '今月の AWS の利用費は、' + floatFormat(billings['Total'], 2) + ' USDです。',
-            pretext: '今月の AWS の利用費は…',
+            fallback: accountId + 'の今月の AWS の利用費は、' + floatFormat(billings['Total'], 2) + ' USDです。',
+            pretext: accountId + 'の今月の AWS の利用費は…',
             color: 'good',
             fields: fields
         }]
