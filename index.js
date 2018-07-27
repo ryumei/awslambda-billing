@@ -31,8 +31,8 @@ var postToSlack = function(billings, context) {
     var message = {
         title: "billing report",
         attachments: [{
-            fallback: accId + ' の今月の AWS の利用費は、' + floatFormat(billings['Total'], 2) + ' USDです。',
-            pretext: accId + ' の今月の AWS の利用費は…',
+            fallback: accId.Account + ' の今月の AWS の利用費は、' + floatFormat(billings['Total'], 2) + ' USDです。',
+            pretext: accId.Account + ' の今月の AWS の利用費は…',
             color: 'good',
             fields: fields
         }]
