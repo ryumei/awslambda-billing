@@ -3,7 +3,7 @@ node_js:
 - '6.10'
 deploy:
   provider: lambda
-  function_name: billing-report
+  function_name: aggregate_billing
   region: ap-northeast-1
   role: arn:aws:iam::488687360624:role/lambda_baic_execution
   runtime: nodejs6.10
